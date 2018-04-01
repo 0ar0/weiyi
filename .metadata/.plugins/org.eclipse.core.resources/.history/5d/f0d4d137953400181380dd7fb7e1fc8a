@@ -1,0 +1,8 @@
+package com.weiyi.control;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+@WebServlet("/pattern")
+public class ApatternServlet extends HttpServlet{
+
+}

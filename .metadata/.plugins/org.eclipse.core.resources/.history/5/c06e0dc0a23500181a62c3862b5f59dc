@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册页面</title>
+	<link href="scripts/miniui/themes/icons.css" rel="stylesheet" type="text/css" />
+ 	<link href="scripts/miniui/themes/default/miniui.css" rel="stylesheet" type="text/css" />
+    <script src="scripts/jquery.min.js" ></script>	
+    <script src="scripts/miniui/locale/en_US.js" ></script>
+    <script src="scripts/miniui/miniui.js" ></script>
+</head>
+<body background="Images/background.jpg">
+
+	<div id="layout1" class="mini-layout" style="width:100%;height:562px;">
+
+	     <div title="注册面板" region="east" width="200px"  >
+	      		<table id="myForm">
+		        	<tr>
+		        		<td><font color="white">用户名</font></td>
+		        		<td><input class="mini-TextBox" style="border:0px;background:rgba(0, 0, 0, 0);opacity：0.1; "></td>
+		        	</tr>
+		        	<tr>
+		        		<td><font color="white">密码</font></td>
+		        		<td><input class="mini-password" style="border:0px;background:rgba(0, 0, 0, 0); opacity：0.1;"></td>
+		        	</tr>
+		        	<tr>
+		        		<td><font color="white">确认密码</font></td>
+		        		<td><input class="mini-password" style="border:0px;background:rgba(0, 0, 0, 0);opacity：0.1; "></td>
+		        	</tr>
+		        	<tr>
+		        		<td><font color="white">姓名</font></td>
+		        		<td><input name="name" class="mini-TextBox" style="border:0px;background:rgba(0, 0, 0, 0);opacity：0.1; "></td>
+		        	</tr>
+		        	<tr>
+		        		<td><font color="white">邮箱</font></td>
+		        		<td><input  name="email" class="mini-TextBox" vtype="email"  required="true" style="border:0px;background:rgba(0, 0, 0, 0);opacity：0.1; "></td>
+		        	</tr>
+		        	<tr>
+		        		<td><font color="white">电话</font></td>
+		        		<td><input name="telphone" class="mini-TextBox" vtype="phone"  required="true" style="border:0px;background:rgba(0, 0, 0, 0);opacity：0.1; "></td>
+		        	</tr>
+		        	<tr>
+		        		<td><font><a id="submit" class="mini-button" iconCls="icon-edit" onclick="onClick">注册</a><font></td>
+		        	</tr>
+		        </table>
+	    </div>
+    </div>
+    
+	        
+   		
+	
+	
+
+
+	<script type="text/javascript">
+		
+			
+			function load(){
+				var from = mini.from("#myForm");
+				from.validate();
+				var data = from.getData();
+				var json = mini.encode(data); 
+				console.log(json);
+				$.ajax({
+				    url: "controller",
+				    type: "post",
+				    data: { data : json ,query:"UserRegister"},
+				    success: function (Rdata) {
+				    	if(Rdata.status == "success"){
+				       	 	location.href = "";
+				    	}
+				    	
+				    }
+				});
+			}
+			
+			
+			/////////////调用区
+			 mini.parse();
+			var submit = mini.get("submit");
+			submit.on("click",function(){
+				alert("click")
+				load();
+			});
+			
+			
+		
+	</script>
+</body>
+</html>

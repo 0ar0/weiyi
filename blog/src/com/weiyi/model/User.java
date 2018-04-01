@@ -7,7 +7,9 @@ public class User {
 	private String name;
 	private String tel;
 	private String email;
-	public User(int id, String username, String password, String name, String tel, String email) {
+	private int level;
+	
+	public User(int id, String username, String password, String name, String tel, String email, int level) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -15,10 +17,22 @@ public class User {
 		this.name = name;
 		this.tel = tel;
 		this.email = email;
+		this.level = level;
 	}
+	
+	
+	
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	public int getId() {
 		return id;

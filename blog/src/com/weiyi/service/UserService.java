@@ -2,6 +2,7 @@ package com.weiyi.service;
 
 import com.weiyi.dao.UserDao;
 import com.weiyi.db.TransactionContext;
+import com.weiyi.util.StringUtil;
 
 public class UserService {
 	/**
@@ -14,17 +15,28 @@ public class UserService {
 	public boolean login(String userName,String password) throws Exception{
 		try {
 			TransactionContext tran = new TransactionContext();
+			tran.beginTran(true);
 			UserDao userDao = new UserDao(tran);
 			if(userName.contains("@")){
 				//ÓÊÏäµÇÂ¼
 				//userDao.
-				
+				if(!userDao.loginByEmail(userName,password)){
+					throw new Exception("ÕËºÅ»òÃÜÂë´íÎó");
+				}
+				return true;
+			}else if(StringUtil.isDigital(userName)){
+				if(!userDao.loginByTel(userName, password)){
+					throw new Exception("ÕËºÅ»òÃÜÂë´íÎó");
+				}
+				return true;	
+			}else {
+				if(!userDao.loginByUserName(userName, password)){
+					throw new Exception("ÕËºÅ»òÃÜÂë´íÎó");
+				}
+				return true;
 			}
-			
 		} catch (Exception e) {
 			throw new Exception("DB³ö´í" + e.getMessage());
 		}
-		
-		return false;
 	}
 }

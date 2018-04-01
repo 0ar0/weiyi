@@ -8,7 +8,7 @@ import java.util.List;
 import com.weiyi.db.TransactionContext;
 import com.weiyi.model.User;
 
-public class UserDao implements BaseDao{
+public class UserDao implements BaseDao<User>{
 	private TransactionContext tran = null;
 	
 	
@@ -16,38 +16,50 @@ public class UserDao implements BaseDao{
 		super();
 		this.tran = tran;
 	}
+	/**
+	 * 注册一个用户
+	 * @throws Exception 
+	 */
+	@Override
+	public int add(User t) throws Exception {
+		Connection conn = tran.getConnection();
+		String sql = "insert into db_blog (username,password,name,email,tel,level) values(?,?,?,?,?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, t.getUsername() );
+		pstmt.setString(2, t.getPassword());
+		pstmt.setString(3, t.getName());
+		pstmt.setString(4, t.getEmail());
+		pstmt.setString(5, t.getTel());
+		pstmt.setInt(6, t.getLevel());
+		int result = pstmt.executeUpdate();
+		return 0;
+	}
 
 	@Override
-	public int add(Object t) {
+	public int updateById(User t, int id) throws Exception{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int updateById(Object t, int id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List selectById(int id) {
+	public List selectById(int id) throws Exception{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int deleteById(int[] id) {
+	public int deleteById(int[] id) throws Exception{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	
 	
-	public boolean loginByUserName(User user) throws Exception{
+	public boolean loginByUserName(String email, String password) throws Exception{
 		Connection conn = tran.getConnection();
 		String sql = "select id from db_userd where username = ? and password = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, user.getUsername());
-		pstmt.setString(2, user.getPassword());
+		pstmt.setString(1,email);
+		pstmt.setString(2, password);
 		ResultSet rs = pstmt.executeQuery();
 		if(rs.next()){
 			return true;
@@ -55,12 +67,12 @@ public class UserDao implements BaseDao{
 		return false;
 	}
 	
-	public boolean loginByEmail(User user) throws Exception{
+	public boolean loginByEmail(String email, String password) throws Exception{
 		Connection conn = tran.getConnection();
 		String sql = "select id from db_userd where username = ? and password = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, user.getEmail());
-		pstmt.setString(2, user.getPassword());
+		pstmt.setString(1, email);
+		pstmt.setString(2, password);
 		ResultSet rs = pstmt.executeQuery();
 		if(rs.next()){
 			return true;
@@ -69,12 +81,12 @@ public class UserDao implements BaseDao{
 	}
 	
 	
-	public boolean loginByTel(User user) throws Exception{
+	public boolean loginByTel(String email, String password) throws Exception{
 		Connection conn = tran.getConnection();
 		String sql = "select id from db_userd where username = ? and password = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, user.getTel());
-		pstmt.setString(2, user.getPassword());
+		pstmt.setString(1, email);
+		pstmt.setString(2, password);
 		ResultSet rs = pstmt.executeQuery();
 		if(rs.next()){
 			return true;
