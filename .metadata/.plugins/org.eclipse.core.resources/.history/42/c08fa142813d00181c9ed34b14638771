@@ -38,10 +38,6 @@ public class UserServlet extends HttpServlet{
 		JSONObject json = new JSONObject(data);
 		User user = new User();
 		user.setTel(json.getString("telphone"));
-		user.setEmail(json.getString("email"));
-		user.setUsername(json.getString("username"));
-		user.setPassword(json.getString("password"));
-		user.setName(json.getString(""));
 	}
 
 	private void doLogin(HttpServletRequest request, HttpServletResponse response) {

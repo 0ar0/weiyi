@@ -27,7 +27,7 @@ public class Controller extends HttpServlet {
 		if(query.contains("User")){
 			request.getRequestDispatcher("UserServlet").forward(request, response);
 		}else if(query.contains("")){
-			
+			response.sendRedirect("");
 		}
 	}
 	

@@ -9,7 +9,7 @@
     <!-- <script src="scripts/miniui/locale/en_US.js" ></script> -->
     <script src="scripts/miniui/miniui.js" ></script>
 </head>
-<body background="Images/background.jpg">    
+<body background="Images/background.jpg">
 
 	<div id="layout1" class="mini-layout" style="width:100%;height:562px;">
 
